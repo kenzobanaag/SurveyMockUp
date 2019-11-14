@@ -53,6 +53,7 @@ export default function AddQuestionDialog(props) {
                         id="question_text"
                         label="Question"
                         type="text"
+                        value={props.questionText}
                         fullWidth
                         //defaultValue="This is a test"
                     />
@@ -65,7 +66,7 @@ export default function AddQuestionDialog(props) {
                         fullWidth
                         autoFocus
                         defaultValue="star-rating"
-                        //value="star-rating"
+                        value={props.questionType}
                         id='question_type_select'
                         inputProps={{
                             name: 'question_type',

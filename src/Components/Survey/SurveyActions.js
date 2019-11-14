@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  marginAlign: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 export default function SurveyActions(props) {
@@ -64,33 +67,41 @@ export default function SurveyActions(props) {
       </div>
       <Grid container spacing={1} direction="column" alignItems="flex-start">
         <Grid item>
-          <ButtonGroup
+            <Button
             variant="contained"
             color="primary"
             size="large"
-            aria-label="full width contained secondary button group"
-          >
-            <Button>Publish</Button>
-            <Button>Save</Button>
-          </ButtonGroup>
+            className={classes.marginAlign}
+            >Publish</Button>
+            <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            className={classes.marginAlign}
+            >Save</Button>
         </Grid>
-        <Grid item>
-          <ButtonGroup
+        <Grid item>     
+            <Button 
+            onClick={handleClickOpen}
             variant="contained"
             color="secondary"
             size="large"
-            aria-label="full width contained secondary button group"
-          >
-            <Button 
-            onClick={handleClickOpen}
+            className={classes.marginAlign}
             >Add Question
             </Button>
-            <DialogTest open={open} onClose={handleClose} onAdd={handleAdd}/>
-            <Button>Configure Trigger</Button>
-            <Button>Get Embeddable Code</Button>
-          </ButtonGroup>
+            <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            className={classes.marginAlign}>Configure Trigger</Button>
+            <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            className={classes.marginAlign}>Get Embeddable Code</Button>
         </Grid>
       </Grid>
+      <DialogTest open={open} onClose={handleClose} onAdd={handleAdd}/>
     </Paper>
   );
 }
