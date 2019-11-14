@@ -3,8 +3,13 @@
     We could use this class to manipulate and show new or existing
     survey items. 
 */
+
+/* 
+    TODO: Finish Survey Actions and QuestionDialog first
+          Do survey form
+*/
 import React, {Component} from 'react';
-import SurveyComponents from './SurveyActions';
+import SurveyActions from './SurveyActions';
 import SurveyForm from './SurveyForm';
 
 class SurveyPage extends Component {
@@ -17,7 +22,14 @@ class SurveyPage extends Component {
                 surveyTitle: '',
                 surveyDescription: ''
             }
-        ]
+        ],
+        //mocking question types
+        questionTypes : [
+            {type: 'star-rating'},
+            {type: 'multiple-choice'},
+            {type: 'comments-box'}
+        ],
+        questions: []
     }
 
     /*
@@ -30,8 +42,10 @@ class SurveyPage extends Component {
     render() {
         return(
             <div className="">
-                <SurveyComponents/>
-                <SurveyForm/>
+                <SurveyActions
+                types={this.state.questionTypes}/>
+                <SurveyForm
+                questions={this.state.questions}/>
             </div>
         );
     }

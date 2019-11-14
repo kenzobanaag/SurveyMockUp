@@ -3,12 +3,22 @@
 import React from 'react';
 import NavBar from '../Header/NavBar'
 import SurveyPage from '../Survey/SurveyCreationPage';
+import {createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+
+const theme = createMuiTheme({
+    palette: {
+      primary: {main: '#981E32'},
+      secondary: { main: '#53565A'}
+    },
+  });
 
 const container = () => {
     return(
         <div className="">
-            <NavBar/>
-            <SurveyPage />
+            <MuiThemeProvider theme={theme}>
+                <NavBar/>
+                <SurveyPage />
+            </MuiThemeProvider>
         </div>
     );
 }
