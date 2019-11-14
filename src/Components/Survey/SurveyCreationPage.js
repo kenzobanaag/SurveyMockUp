@@ -18,17 +18,15 @@ export default function SurveyPage (){
     //need to use a class component here. This is for prototyping only 
     const [questions, setQuestions] = useState([]);
 
-    const createNewId = () => {
-        return require('uuid/v1');
-    }
-
+    const createNewId = require('uuid/v1');
+    
     const addQuestionHandler = question => {
-        setQuestions(prevQuestions => [...prevQuestions, {id: createNewId, 
+        setQuestions(prevQuestions => [...prevQuestions, {id: createNewId(), 
             ...question}]);
     }
 
     const removeQuestionHandler = questionId => {
-        console.log(questionId)
+        //console.log("removed id: " + questionId)
         setQuestions(prevQuestions => 
             prevQuestions.filter(question => question.id !== questionId));
     }
