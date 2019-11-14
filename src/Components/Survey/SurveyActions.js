@@ -77,7 +77,7 @@ export default function SurveyActions(props) {
           <ul className={classes.noStyle}>
             <li>Date Created: <span>11/14/2019</span></li>
             <li>Published Status: <span style={{color: 'red'}}>No</span></li>
-            <li>Survey ID: <span>{createNewId()}</span></li>
+            <li>Survey ID: <span>{props.surveyId}</span></li>
           </ul>
         </Typography>
       </React.Fragment>

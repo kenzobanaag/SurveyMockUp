@@ -18,7 +18,11 @@ export default function SurveyPage (){
     //need to use a class component here. This is for prototyping only 
     const [questions, setQuestions] = useState([]);
 
+    
+
     const createNewId = require('uuid/v1');
+
+    const [surveyProps, setSurveyProps] = useState([createNewId()])
     
     const addQuestionHandler = question => {
         setQuestions(prevQuestions => [...prevQuestions, {id: createNewId(), 
@@ -62,7 +66,7 @@ export default function SurveyPage (){
         return(
             <div className="">
                 <SurveyActions
-                onAddQuestion={addQuestionHandler} />
+                onAddQuestion={addQuestionHandler} surveyId={surveyProps}/>
                 <SurveyForm
                 questions={questions} onDeleteQuestion={removeQuestionHandler}/>
             </div>
