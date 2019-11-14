@@ -46,6 +46,10 @@ export default function SurveyActions(props) {
     setOpen(false);
   };
 
+  const handleAdd = value => {
+    props.onAddQuestion({questionText: value.text, questionType: value.type})
+  }
+
   return (
     <Paper className={classes.root}>
       <div>
@@ -81,7 +85,7 @@ export default function SurveyActions(props) {
             onClick={handleClickOpen}
             >Add Question
             </Button>
-            <DialogTest open={open} onClose={handleClose}/>
+            <DialogTest open={open} onClose={handleClose} onAdd={handleAdd}/>
             <Button>Configure Trigger</Button>
             <Button>Get Embeddable Code</Button>
           </ButtonGroup>

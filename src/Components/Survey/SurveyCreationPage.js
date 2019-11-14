@@ -8,14 +8,29 @@
     TODO: Finish Survey Actions and QuestionDialog first
           Do survey form
 */
-import React, {Component} from 'react';
+import React, { useState} from 'react';
 import SurveyActions from './SurveyActions';
 import SurveyForm from './SurveyForm';
 
-class SurveyPage extends Component {
-    
+export default function SurveyPage (){
+
+    //USE CLASS COMPONENT!!! or use useEffect....
+    //need to use a class component here. This is for prototyping only 
+    const [questions, setQuestions] = useState([]);
+
+    const addQuestionHandler = question => {
+        setQuestions(prevQuestions => [...prevQuestions, {id: 'index', 
+            ...question}]);
+    }
+
+    const removeQuestionHandler = questionId => {
+        console.log(questionId)
+        setQuestions(prevQuestions => 
+            prevQuestions.filter(question => question.id !== questionId));
+    }
+
     //set the settable items here
-    state = {
+    /*state = {
         //an array might not be needed
         surveyProps : [
             {
@@ -30,25 +45,27 @@ class SurveyPage extends Component {
             {type: 'comments-box'}
         ],
         questions: []
-    }
+    }*/
+
+    
 
     /*
         When editing set state here
     */
-    componentWillMount() {
+    // componentWillMount() {
 
-    }
+    // }
 
-    render() {
+    
         return(
             <div className="">
                 <SurveyActions
-                types={this.state.questionTypes}/>
+                onAddQuestion={addQuestionHandler} />
                 <SurveyForm
-                questions={this.state.questions}/>
+                questions={questions} onDeleteQuestion={removeQuestionHandler}/>
             </div>
         );
-    }
+    
 }
 
-export default SurveyPage;
+//export default SurveyPage;

@@ -33,8 +33,9 @@ export default function AddQuestionDialog(props) {
     const handleAdd = () => {
         var qText = document.getElementById("question_text").value;
         var qType = document.getElementById("question_type").value;
-        console.log(qText);
-        console.log(qType);
+        var test = {text: qText, type: qType}
+        //props.onAdd({questionText: qText, questionNumber: '1'})
+        props.onAdd(test);
         onClose();
     }
 
@@ -63,7 +64,9 @@ export default function AddQuestionDialog(props) {
                     <Select
                         fullWidth
                         autoFocus
-                        value="star-rating"
+                        defaultValue="star-rating"
+                        //value="star-rating"
+                        id='question_type_select'
                         inputProps={{
                             name: 'question_type',
                             id: 'question_type',

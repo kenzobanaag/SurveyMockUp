@@ -17,6 +17,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import QuestionList from './SurveyQuestionList';
 import { makeStyles } from '@material-ui/core/styles';
+import {useState} from 'react'
 
 
 const useStyles = makeStyles(theme => ({
@@ -32,30 +33,39 @@ const useStyles = makeStyles(theme => ({
   }));
 
   //array should be state, so when state is updated, everything is rerendered
-  function generateQuestionArray(questionArray) {
+  function generateQuestionArray(questionArray, deleteid) {
       if(questionArray.length > 0)
-      return questionArray.map(element => <QuestionList 
+      return questionArray.map((element,index) => <QuestionList 
         question={element.questionText} 
-        number={element.questionNumber}/>);
+        type={element.questionType}
+        id={index}
+        key={index}
+        //remove delete handler after
+        onDelete={deleteid}/>);
   }
 
 export default function SurveyForm(props) {
 
     const classes = useStyles();
     const [dense, setDense] = React.useState(false);
-    const questions = props.questions
+    const questions = props.questions;
+
+    const deleteHandler = questionId => {
+        props.onDeleteQuestion(questionId);
+    }
 
     return(
         <div className="">
             <Paper className={classes.root}>
             <Grid item xs={12} md={6}>
           <Typography variant="h6" className={classes.title}>
-            Question List
+            Questions
           </Typography>
           <div className={classes.demo}>
             <List dense={dense}>
               {
-              generateQuestionArray(questions)
+                //remove deletehandler  
+                generateQuestionArray(questions, deleteHandler)
               }
             </List>
           </div>

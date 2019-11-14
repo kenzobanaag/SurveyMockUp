@@ -20,10 +20,11 @@ const surveyQuestionList = (props) =>{
                 </ListItemAvatar>
                 <ListItemText
                     primary={props.question}
-                    secondary={"Question #" + props.number}
+                    secondary={props.type}
+                    id={props.id}
                 />
                 <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" aria-label="delete" onClick={() => props.onDelete(props.id)}>
                         <DeleteIcon />
                     </IconButton>
                     <IconButton edge="end" aria-label="delete">
