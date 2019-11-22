@@ -22,6 +22,7 @@ export default function SurveyPage (){
 
     const createNewId = require('uuid/v1');
 
+    //this is kinda wrong, we need to create it inside this object not the object itself
     const [surveyProps, setSurveyProps] = useState([createNewId()])
     
     const addQuestionHandler = question => {
