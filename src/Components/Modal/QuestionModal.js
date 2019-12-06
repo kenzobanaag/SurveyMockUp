@@ -43,6 +43,8 @@ export default function AddQuestionDialog(props) {
 
     const handleClose = () => {
         onClose();
+        setReqHelperText("");
+        setIsError(false);
     };
 
     const handleAdd = () => {
