@@ -27,6 +27,12 @@ const useStyles = makeStyles(theme => ({
 
 
 //should receive user statistics
+/*
+    param: props.title (Total Surveys Created......)
+           props.value (Equivalent value)
+    
+    onClick listener for create a new survey also should be here
+*/
 function HomeHeader(props) {
 
     const classes = useStyles();
@@ -39,7 +45,7 @@ function HomeHeader(props) {
                     Welcome Back, <span>User!</span>
                 </Typography>
                 <Divider className={classes.distance}/>
-                <Typography variant="overline" guttermBottom>
+                <Typography variant="overline" gutterBottom>
                    
                 </Typography>
                 <Button color="primary" variant="contained">
