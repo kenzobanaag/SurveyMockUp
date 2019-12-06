@@ -6,9 +6,7 @@
 */
 
 /*
-    TODO: Dynamically enter menu items
-          Margin in between texts
-          Get the question text and type value to the parent 
+    FIX: Contents of the dialog cannot be edited for some reason.  
 */
 
 import React from 'react'
@@ -24,38 +22,73 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 export default function AddQuestionDialog(props) {
+
+    const [reqHelperText, setReqHelperText] = React.useState("");
+
+    const [isError, setIsError] = React.useState(false);
+
     const { open, onClose } = props
+
+    const createNewId = require('uuid/v1');
+
+    const itemId = () => {
+        console.log(props.questionId)
+        if(props.questionId === undefined || props.questionId === null) {
+            return createNewId();
+        }
+        else {
+            return props.questionId;
+        }
+    }
 
     const handleClose = () => {
         onClose();
     };
 
     const handleAdd = () => {
-        var qText = document.getElementById("question_text").value;
-        var qType = document.getElementById("question_type").value;
-        var test = {text: qText, type: qType}
-        //props.onAdd({questionText: qText, questionNumber: '1'})
-        props.onAdd(test);
-        onClose();
+        if(document.getElementById("question_text").value === "") {
+            setReqHelperText("Required*");
+            setIsError(true);
+        }
+        else {
+            props.onAdd(getQuestionObject());
+            onClose();
+        }
+    }
+
+    const handleOnTextChange = () => {
+        setReqHelperText("");
+        setIsError(false);
+    }
+
+    const getQuestionObject = () => {
+        var id = itemId();
+        return ({
+            questionText: document.getElementById("question_text").value,
+            questionType: document.getElementById("question_type").value,
+            questionId: id,
+        });
     }
 
     return (
         <div className="">
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title"
-                fullWidth>
+                fullWidth
+                >
                 <DialogTitle id="form-dialog-title">Add Question</DialogTitle>
                 <DialogContent >
                     <DialogContentText >
                         Enter your question
                     </DialogContentText>
                     <TextField
+                        error={isError}
                         autoFocus
                         id="question_text"
                         label="Question"
-                        type="text"
-                        value={props.questionText}
                         fullWidth
-                        //defaultValue="This is a test"
+                        helperText={reqHelperText}
+                        defaultValue={props.questionText === undefined ? "" : props.questionText}
+                        onChange={() => handleOnTextChange()}
                     />
                     </DialogContent>
                     <DialogContent >
@@ -65,8 +98,7 @@ export default function AddQuestionDialog(props) {
                     <Select
                         fullWidth
                         autoFocus
-                        defaultValue="star-rating"
-                        value={props.questionType}
+                        defaultValue={props.questionType === undefined ? "star-rating" : props.questionType}
                         id='question_type_select'
                         inputProps={{
                             name: 'question_type',
@@ -80,10 +112,10 @@ export default function AddQuestionDialog(props) {
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
-          </Button>
+                    </Button>
                     <Button onClick={handleAdd} color="primary">
-                        Add
-          </Button>
+                        {props.buttonText}
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>
