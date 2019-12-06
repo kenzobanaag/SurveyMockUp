@@ -4,13 +4,10 @@
     survey items. 
 */
 
-/* 
-    TODO: Finish Survey Actions and QuestionDialog first
-          Do survey form
-*/
 import React, { useState} from 'react';
 import SurveyActions from './SurveyActions';
 import SurveyForm from './SurveyForm';
+import {ContextProvider} from '../Context/ContextClass';
 
 /*
     This class is where we do the requests if we are editing a survey.
@@ -65,13 +62,53 @@ export default function SurveyPage (){
 
     // }
 
+    /*
+        TODO: We could potentially pass a prop here
+        
+        
+        constMockObject() {
+            if(fetch is null) {
+                //set null object
+            }
+            else {
+                //set the object from the fetch
+            }
+        }
+    */
+    const mockQuestionObject = {
+            questionId: "",
+            questionText: "",
+            questionType: "",
+            questionOptionalText : {}
+    }
+
+    const mockSurveyObject = {
+        surveyId : "",
+        surveyTitle: "",
+        //probably need a mock of this object so we have a blueprint or not? 
+        questions : [
+            {
+                questionId: "",
+                questionText: "",
+                questionType: "",
+                questionOptionalText : {}
+            },
+        ],
+        trigger : {
+            triggerType: "",
+            triggerOption: "",
+        }
+    }
+
     
         return(
             <div className="">
-                <SurveyActions
-                onAddQuestion={addQuestionHandler} surveyId={surveyProps}/>
-                <SurveyForm
-                questions={questions} onDeleteQuestion={removeQuestionHandler}/>
+                <ContextProvider surveyObjectParent={mockSurveyObject}>
+                    <SurveyActions
+                    onAddQuestion={addQuestionHandler} surveyId={surveyProps}/>
+                    <SurveyForm
+                    questions={questions} onDeleteQuestion={removeQuestionHandler}/>
+                </ContextProvider>
             </div>
         );
     
