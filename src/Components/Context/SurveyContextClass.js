@@ -5,6 +5,14 @@ const { Provider, Consumer } = React.createContext();
 
 class SurveyContextProvider extends Component {
 
+    /*
+        Im not sure if we should do the fetch here.
+        The reason im assigning the props
+        and not creating the object here is becuase 
+        idk what im doing and i havent thought it through
+        to the point where ive thought about the trade offs.
+        Its a pretty easy fix to move stuff too. 
+    */
     state = this.props.surveyObjectParent;
 
     createNewId = require('uuid/v1');

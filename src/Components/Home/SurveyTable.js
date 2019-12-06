@@ -18,6 +18,8 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
+import { HomeContextConsumer } from '../Context/HomeContextClass';
+
 const tableIcons = {
     Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
     DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
@@ -62,58 +64,39 @@ function SurveyTable() {
         }
     */
 
-    //dummy data. Separate column from data and were good
-    const [state, setState] = React.useState({
-        columns: [
-            { title: 'Name', field: 'name' },
-            { title: 'Published Status', field: 'status' },
-            { title: 'Date Created', field: 'dateCreated' },
-            {
-                title: 'Responses',
-                field: 'responses',
-                //type: 'numeric',
-            },
-        ],
-        //Dummy data
-        data: [
-            { name: 'Test Survey 1', status: 'Yes', dateCreated: '11/21/2019', responses: 69 },
-            { name: 'Test Survey 2', status: 'No', dateCreated: '11/16/2019', responses: 49 },
-            { name: 'Test Survey 3', status: 'Yes', dateCreated: '11/10/2019', responses: 59 },
-            { name: 'Test Survey 4', status: 'No', dateCreated: '11/10/2019', responses: 69 },
-            { name: 'Test Survey 5', status: 'Yes', dateCreated: '11/15/2019', responses: 69 },
-        ],
-
-    });
-
     return (
         <div className={classes.root}>
-            <MaterialTable
-                title="Surveys"
-                columns={state.columns}
-                data={state.data}
-                icons={tableIcons}
-                actions={[
-                    {
-                        icon: () => <Edit />,
-                        tooltip: 'Edit Survey',
-                        onClick: (event, rowData) => alert("This is a placeholder " + rowData.name),
-                    },
-                    {
-                        icon: () => <VisibilityIcon />,
-                        tooltip: 'Preview Survey',
-                        onClick: (event, rowData) => alert("This is a placeholder " + rowData.name),
-                    },
-                    {
-                        icon: () => <DeleteOutline />,
-                        tooltip: 'Delete Survey',
-                        onClick: (event, rowData) => alert("This is a placeholder " + rowData.name)
-                    },
-                ]}
-                options={{
-                    //index of actions column in the table
-                    actionsColumnIndex: 4,
-                }}
-            />
+            <HomeContextConsumer>
+                {({homeObject}) => (
+                    <MaterialTable
+                        title="Surveys"
+                        columns={homeObject.columns}
+                        data={homeObject.surveys}
+                        icons={tableIcons}
+                        actions={[
+                            {
+                                icon: () => <Edit />,
+                                tooltip: 'Edit Survey',
+                                onClick: (event, rowData) => alert("This is a placeholder " + rowData.name),
+                            },
+                            {
+                                icon: () => <VisibilityIcon />,
+                                tooltip: 'Preview Survey',
+                                onClick: (event, rowData) => alert("This is a placeholder " + rowData.name),
+                            },
+                            {
+                                icon: () => <DeleteOutline />,
+                                tooltip: 'Delete Survey',
+                                onClick: (event, rowData) => alert("This is a placeholder " + rowData.name)
+                            },
+                        ]}
+                        options={{
+                            //index of actions column in the table
+                            actionsColumnIndex: 4,
+                        }}
+                    />
+                )}
+            </HomeContextConsumer>
         </div>
     );
 }
