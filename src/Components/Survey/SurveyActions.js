@@ -67,6 +67,18 @@ export default function SurveyActions(props) {
   };
 
 
+  //could be improved....
+  const isPopulated = (surveyObject) => {
+    if(surveyObject.surveyTitle.length) {
+      return false;
+    }
+    if(surveyObject.questions.length) {
+      return false;
+    }
+    return true;
+  }
+
+
   return (
     <Paper className={classes.root}>
       <React.Fragment>
@@ -103,19 +115,24 @@ export default function SurveyActions(props) {
           )}
         </SurveyContextConsumer>
       </React.Fragment>
+
       <React.Fragment>
-      <Grid container spacing={1} direction="column" alignItems="flex-start">
+        <SurveyContextConsumer>
+          {({survey}) => (
+            <Grid container spacing={1} direction="column" alignItems="flex-start">
         <Grid item>
             <Button
             variant="contained"
             color="primary"
             size="large"
+            disabled={isPopulated(survey)}
             className={classes.marginAlign}
             >Publish</Button>
             <Button
             variant="contained"
             color="primary"
             size="large"
+            disabled={isPopulated(survey)}
             className={classes.marginAlign}
             >Save</Button>
         </Grid>
@@ -137,9 +154,12 @@ export default function SurveyActions(props) {
             variant="contained"
             color="secondary"
             size="large"
+            disabled={isPopulated(survey)}
             className={classes.marginAlign}>Get Embeddable Code</Button>
         </Grid>
       </Grid>
+          )}
+      </SurveyContextConsumer>
       </React.Fragment>
       <SurveyContextConsumer>
           {({addQuestionListener}) => (
