@@ -20,6 +20,11 @@ class ApiCall {
     /*
         Gets all survey responses from an id
         @param: surveyId
+
+        Currently returns a survey id, creationTime, an answers array that contains
+            [answerType = StarRating, questionId = 0 <- should be varrying, stars:, id]
+
+        "5dec493cf525a2415c89c290"
     */
     static getAllSurveyResponses(surveyId) {
         return (axios.get(LOCAL_URL + RESPONSE + SURVEY + surveyId));
@@ -28,6 +33,11 @@ class ApiCall {
     /*
         Gets one single survey response
         @param: responseId
+
+        Currently cannot access one survey response, im probably not 
+        pulling from the latest backend
+
+        "5dec57ba743746253cb0039e" <- id i tried
     */
     static getASurveyResponse(responseId) {
         return (axios.get(LOCAL_URL + RESPONSE + RESPONSE + responseId));
@@ -36,6 +46,11 @@ class ApiCall {
     /*
         Gets a single survey
         @param: surveyId
+
+        Returns an object with
+        creationTime, owner, published, questions, title, triggers, _id.
+
+        "5dec493cf525a2415c89c290"
     */
     static getASurvey(surveyId) {
         return (axios.get(LOCAL_URL + SURVEY + SURVEY + surveyId));
@@ -44,6 +59,8 @@ class ApiCall {
     /*
         Gets all the surveys a user has
         @param: userId
+
+        "TestPacito"
     */
     static getAllSurveys(userId) {
         return (axios.get(LOCAL_URL + SURVEY + USER + userId));
